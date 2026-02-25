@@ -28,6 +28,7 @@ public class OrganizationController {
         return ResponseEntity.ok(organizationService.getOrganizations());
     }
 
+
     @GetMapping("{organizationId}/impact")
     public ResponseEntity<OrganizationNpoDto> getOrganizationNpoData(@PathVariable Long organizationId) {
         return ResponseEntity.ok(organizationService.getOrganizationNpoData(organizationId));
