@@ -30,6 +30,9 @@ public class Organization {
     @NotNull(message = "Email cannot be empty")
     private String email;
 
+    @NotNull(message = "Password is required")
+    private String password;
+
     @NotNull(message = "Description cannot be empty")
     private String description;
 

@@ -13,6 +13,7 @@ public class VolunteerMapper {
         return Volunteer.builder()
                 .name(volunteerInputDto.getName())
                 .email(volunteerInputDto.getEmail())
+                .password(volunteerInputDto.getPassword())
                 .bio(volunteerInputDto.getBio())
                 .availabilityStatus(AvailabilityStatus.ACTIVE)
                 .build();

@@ -16,6 +16,9 @@ public class OrganizationInputDto {
     @Email(message = "Invalid Email format")
     private String email;
 
+    @NotNull(message = "Password cannot be empty")
+    private String password;
+
     @NotNull(message = "Description cannot be empty")
     private String description;
 

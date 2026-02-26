@@ -9,6 +9,7 @@ import com.example.volunet.exceptions.DuplicateResourceException;
 import com.example.volunet.exceptions.ResourceNotFoundException;
 import com.example.volunet.mapper.OrganizationMapper;
 import com.example.volunet.repository.OrganizationRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -19,10 +20,12 @@ import java.util.stream.Collectors;
 public class OrganizationServiceImpl implements OrganizationService {
     private final OrganizationMapper organizationMapper;
     private final OrganizationRepository organizationRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public OrganizationServiceImpl(OrganizationMapper organizationMapper, OrganizationRepository organizationRepository) {
+    public OrganizationServiceImpl(OrganizationMapper organizationMapper, OrganizationRepository organizationRepository, PasswordEncoder passwordEncoder) {
         this.organizationMapper = organizationMapper;
         this.organizationRepository = organizationRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -37,6 +40,7 @@ public class OrganizationServiceImpl implements OrganizationService {
             }
         }
         Organization newOrganization = organizationMapper.toOrganizationEntity(organizationInputDto);
+        newOrganization.setPassword(passwordEncoder.encode(newOrganization.getPassword()));
         organizationRepository.save(newOrganization);
 
         return organizationMapper.toOrganizationOutputDto(newOrganization);

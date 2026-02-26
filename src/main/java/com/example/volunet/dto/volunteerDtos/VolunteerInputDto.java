@@ -15,6 +15,9 @@ public class VolunteerInputDto {
     @Email(message = "Invalid Email Format")
     private String email;
 
+    @NotNull(message = "Password cannot be empty")
+    private String password;
+
     @NotNull(message = "Bio cannot be empty")
     private String bio;
 }

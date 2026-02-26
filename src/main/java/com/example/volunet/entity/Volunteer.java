@@ -27,6 +27,9 @@ public class Volunteer {
     @Email(message = "Invalid Email format")
     private String email;
 
+    @NotNull(message = "Password is required")
+    private String password;
+
     @NotNull(message = "Bio cannot be empty")
     private String bio;
 

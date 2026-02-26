@@ -13,6 +13,7 @@ public class OrganizationMapper {
         return Organization.builder()
                 .name(organizationInputDto.getName())
                 .email(organizationInputDto.getEmail())
+                .password(organizationInputDto.getPassword())
                 .description(organizationInputDto.getDescription())
                 .location(organizationInputDto.getLocation())
                 .verifiedStatus(organizationInputDto.getVerifiedStatus())

@@ -7,6 +7,7 @@ import com.example.volunet.entity.enums.AvailabilityStatus;
 import com.example.volunet.exceptions.ResourceNotFoundException;
 import com.example.volunet.mapper.VolunteerMapper;
 import com.example.volunet.repository.VolunteerRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,16 +16,19 @@ import java.util.List;
 public class VolunteerServiceImpl implements VolunteerService {
     private final VolunteerMapper volunteerMapper;
     private final VolunteerRepository volunteerRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public VolunteerServiceImpl(VolunteerMapper volunteerMapper, VolunteerRepository volunteerRepository) {
+    public VolunteerServiceImpl(VolunteerMapper volunteerMapper, VolunteerRepository volunteerRepository, PasswordEncoder passwordEncoder) {
         this.volunteerMapper = volunteerMapper;
         this.volunteerRepository = volunteerRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
     @Override
     public VolunteerOutputDto createVolunteer(VolunteerInputDto volunteerInputDto) {
         Volunteer newVolunteer = volunteerMapper.toVolunteerEntity(volunteerInputDto);
+        newVolunteer.setPassword(passwordEncoder.encode(newVolunteer.getPassword()));
         volunteerRepository.save(newVolunteer);
         return volunteerMapper.toVolunteerOutputDto(newVolunteer);
     }
